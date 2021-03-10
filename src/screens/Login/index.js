@@ -26,8 +26,6 @@ class LoginScreen extends Component {
                 name: userData.name,
                 email: userData.email,
                 password: userData.password,
-                slogan: userData.slogan,
-                jobs: userData.jobs,
             });
         }
         else {
@@ -38,7 +36,7 @@ class LoginScreen extends Component {
     async getUserList(Email, Password) {
         try {
             const userJson = await AsyncStorage.getItem('users');
-            //console.log(userJson);
+            console.log(userJson);
             if(userData !== null) {
                 const jsonData = JSON.parse(userJson);
                 let showJson = jsonData.map(e => {
@@ -48,8 +46,6 @@ class LoginScreen extends Component {
                             name: e.name,
                             email: e.email,
                             password: e.password,
-                            slogan: e.slogan,
-                            jobs: e.jobs,
                         });
                     }
                     else {

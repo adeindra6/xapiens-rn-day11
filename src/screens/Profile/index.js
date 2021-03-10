@@ -1,49 +1,46 @@
 import React, { Component } from 'react';
 import {
-    View,
+    Alert,
     StyleSheet,
 } from 'react-native';
 import { ProfileComponent } from '../../component';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class ProfileScreen extends Component {
+    state = {
+        data: [],
+    };
+
+    update(Id, Slogan, Jobs) {
+        const { data } = this.state;
+        const sj = { id: Id, slogan: Slogan, jobs: Jobs };
+        console.log(sj);
+        data.push(sj);
+        console.log(data);
+        this.setState({data: data});
+        AsyncStorage.setItem('sj', JSON.stringify(data));
+        Alert.alert("Info", "Slogan berhasil disimpan");
+    }
+
     render() {
         const { navigation } = this.props;
         const id = navigation.getParam('id','Id');
         const name = navigation.getParam('name', 'Name');
         const email = navigation.getParam('email', 'Email');
         const password = navigation.getParam('password', 'Password');
-        const slogan = navigation.getParam('slogan', 'Slogan');
-        const jobs = navigation.getParam('jobs', 'Jobs');
 
         return(
             <>
                 <ProfileComponent 
-                    action={() => console.log("")}
+                    action={(id, slogan, jobs) => this.update(id, slogan, jobs)}
                     id={ id }
                     name={ name }
                     email={ email }
                     password={ password }
-                    slogan={ slogan }
-                    jobs={ jobs }
                 />
             </>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    body: {
-        flex: 1,
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    title: {
-        fontSize: 32,
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
-});
 
 export default ProfileScreen;

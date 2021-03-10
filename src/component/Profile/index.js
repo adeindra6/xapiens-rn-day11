@@ -14,11 +14,10 @@ class ProfileComponent extends Component {
     }
 
     state = {
+        id: this.props.id,
         name: '',
         email: '',
         password: '',
-        slogan: '',
-        jobs: '',
     };
 
     sloganHandler(text) {
@@ -33,9 +32,9 @@ class ProfileComponent extends Component {
 
     actionSubmit() {
         const { action } = this.props;
-        const { slogan, jobs } = this.state;
-        action(slogan, jobs);
-        this.setState({slogan: '', jobs: ''});
+        const { id, slogan, jobs } = this.state;
+        action(id, slogan, jobs);
+        this.setState({id: id, slogan: slogan, jobs: jobs});
     }
 
     render() {
@@ -48,7 +47,7 @@ class ProfileComponent extends Component {
                 </View>
                 <View style={ styles.body }>
                     <Text style={ styles.name }>{ this.props.name }</Text>
-                    <Text style={ styles.slogan }>{ this.props.slogan }</Text>
+                    <Text style={ styles.slogan }>{ slogan || '' }</Text>
 
                     <Text style={ styles.inputlabel }>Slogan</Text>
                     <TextInput 

@@ -18,7 +18,7 @@ class RegisterScreen extends Component {
     register(Name, Email, Password) {
         const { users } = this.state;
         const lastId = users.length > 0 ? users[users.length - 1].id : 2;
-        const newUser = { id: lastId + 1 ,name: Name, email: Email, password: Password, slogan: '', jobs: '' }
+        const newUser = { id: lastId + 1 ,name: Name, email: Email, password: Password }
         console.log(newUser);
         users.push(newUser);
         console.log(users);
@@ -30,8 +30,6 @@ class RegisterScreen extends Component {
             name: newUser.name,
             email: newUser.email,
             password: newUser.password,
-            slogan: newUser.slogan,
-            jobs: newUser.jobs,
         });
     }
 
